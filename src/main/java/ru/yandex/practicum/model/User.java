@@ -1,6 +1,6 @@
-package model;
+package ru.yandex.practicum.model;
 
-import controller.Marker;
+import ru.yandex.practicum.controller.Marker;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 public class User {
-    @NotBlank (message = "ИД не может быть пустым", groups = Marker.Update.class)
+    @NotNull (message = "ИД не может быть пустым", groups = Marker.Update.class)
     @Positive (message = "ИД должен быть больше 0", groups = Marker.Update.class)
     private Integer id;
 

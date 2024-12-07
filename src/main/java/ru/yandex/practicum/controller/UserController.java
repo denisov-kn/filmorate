@@ -1,8 +1,8 @@
-package controller;
+package ru.yandex.practicum.controller;
 
-import exception.NotFoundException;
 import jakarta.validation.Valid;
-import model.User;
+import ru.yandex.practicum.exception.NotFoundException;
+import ru.yandex.practicum.model.User;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +22,8 @@ public class UserController {
     @PostMapping
     public User createUser(@Valid @RequestBody User user) {
         user.setId(getNextId());
+        if (user.getName() == null)
+           user.setName(user.getLogin());
         users.put(user.getId(),user);
         return user;
     }
@@ -29,13 +31,13 @@ public class UserController {
     @Validated(Marker.Update.class)
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) {
-        if (!users.containsKey(user.getId())) {
-            throw new NotFoundException("Пользователь с таким id - " + user.getId() + " не найден");
-        }
+        if (!users.containsKey(user.getId()))
+            throw new NotFoundException ("Пользователь с таким id: " + user.getId() + " не найден");
         users.replace(user.getId(), user);
         return user;
     }
 
+    @GetMapping
     public Collection<User> finAll() {
         return new ArrayList<>(users.values());
     }

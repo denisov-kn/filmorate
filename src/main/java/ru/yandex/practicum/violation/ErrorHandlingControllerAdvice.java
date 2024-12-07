@@ -1,4 +1,4 @@
-package violation;
+package ru.yandex.practicum.violation;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

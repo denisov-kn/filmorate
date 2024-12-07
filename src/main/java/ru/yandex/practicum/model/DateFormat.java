@@ -1,11 +1,11 @@
-package model;
+package ru.yandex.practicum.model;
 
 import lombok.Getter;
 import java.time.format.DateTimeFormatter;
 
 @Getter
 public enum DateFormat {
-    DATE_FORMAT("dd.MM.yyyy");
+    DATE_FORMAT("yyyy-MM-dd");
 
     private final DateTimeFormatter formatter;
 

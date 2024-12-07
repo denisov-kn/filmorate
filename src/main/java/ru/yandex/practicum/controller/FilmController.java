@@ -1,8 +1,7 @@
-package controller;
-
-import exception.NotFoundException;
+package ru.yandex.practicum.controller;
 import jakarta.validation.Valid;
-import model.Film;
+import ru.yandex.practicum.exception.NotFoundException;
+import ru.yandex.practicum.model.Film;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import java.util.Map;
 @Validated
 @RestController
 @RequestMapping("/films")
-
 public class FilmController {
 
     private Map<Integer, Film> films = new HashMap<>();
@@ -30,9 +28,8 @@ public class FilmController {
     @Validated(Marker.Update.class)
     @PutMapping
     public Film updateFilm(@RequestBody @Valid Film film) {
-        if (!films.containsKey(film.getId())) {
-            throw new NotFoundException("Фильм с таким id - " + film.getId() + " не найден");
-        }
+        if (!films.containsKey(film.getId()))
+            throw new NotFoundException("Фильм с таким id: " + film.getId() + " не найден");
         films.replace(film.getId(), film);
         return  film;
     }

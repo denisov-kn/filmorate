@@ -1,6 +1,7 @@
-package model;
+package ru.yandex.practicum.model;
 
-import controller.Marker;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import ru.yandex.practicum.controller.Marker;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import java.time.Duration;
@@ -10,9 +11,9 @@ import java.time.LocalDate;
 @Data
 public class Film {
 
-    private static final LocalDate MIN_FILM_DATE = LocalDate.parse("28.12.1895");
+    private static final LocalDate MIN_FILM_DATE = LocalDate.parse("1895-12-28", DateFormat.DATE_FORMAT.getFormatter());
 
-    @NotBlank (message = "ИД не может быть пустым", groups = Marker.Update.class)
+    @NotNull (message = "ИД не может быть пустым", groups = Marker.Update.class)
     @Positive (message = "ИД должен быть больше 0", groups = Marker.Update.class)
     private Integer id;
 
@@ -28,10 +29,8 @@ public class Film {
     @Past (message = "Дата релиза не может быть в будущем", groups = {Marker.Create.class, Marker.Update.class})
     private LocalDate releaseDate;
 
-    @Positive (message = "Длительность фильма должно быть больше 0",
-            groups = {Marker.Create.class, Marker.Update.class
-    })
-    private Duration duration;
+    @Positive  (message = "Длительность фильма должно быть больше 0")
+    private Integer duration;
 
     @AssertTrue (message = "Дата фильма не может быть раньше чем 28.12.1895")
     public boolean isValidateReleaseDate() {

@@ -1,4 +1,4 @@
-package violation;
+package ru.yandex.practicum.violation;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
