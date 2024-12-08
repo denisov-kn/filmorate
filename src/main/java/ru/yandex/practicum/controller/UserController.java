@@ -5,7 +5,6 @@ import ru.yandex.practicum.exception.NotFoundException;
 import ru.yandex.practicum.model.User;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -32,13 +31,13 @@ public class UserController {
     @PutMapping
     public User updateUser(@Valid @RequestBody User user) {
         if (!users.containsKey(user.getId()))
-            throw new NotFoundException ("Пользователь с таким id: " + user.getId() + " не найден");
+            throw new NotFoundException("Пользователь с таким id: " + user.getId() + " не найден");
         users.replace(user.getId(), user);
         return user;
     }
 
     @GetMapping
-    public Collection<User> finAll() {
+    public Collection<User> findAll() {
         return new ArrayList<>(users.values());
     }
 

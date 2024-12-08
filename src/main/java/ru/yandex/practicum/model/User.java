@@ -3,7 +3,6 @@ package ru.yandex.practicum.model;
 import ru.yandex.practicum.controller.Marker;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Data
@@ -26,6 +25,6 @@ public class User {
 
     @AssertTrue(message = "Логин не может содержать пробелы")
     public boolean isValidateLogin() {
-        return !login.contains(".*\\s.*");
+        return !login.matches(".*\\s.*");
     }
 }

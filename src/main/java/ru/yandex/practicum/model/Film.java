@@ -1,10 +1,8 @@
 package ru.yandex.practicum.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import ru.yandex.practicum.controller.Marker;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import java.time.Duration;
 import java.time.LocalDate;
 
 
@@ -34,6 +32,7 @@ public class Film {
 
     @AssertTrue (message = "Дата фильма не может быть раньше чем 28.12.1895")
     public boolean isValidateReleaseDate() {
-        return releaseDate.isAfter(MIN_FILM_DATE);
+        if (releaseDate != null) return releaseDate.isAfter(MIN_FILM_DATE);
+        return true;
     }
 }
