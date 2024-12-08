@@ -174,11 +174,6 @@ class UserControllerTest {
 
         Set<ConstraintViolation<User>> violations = validator.validate(user, Marker.Create.class);
 
-        violations.forEach(violation -> {
-            System.out.println("Поле: " + violation.getPropertyPath());
-            System.out.println("Сообщение: " + violation.getMessage());
-        });
-
         Assertions.assertEquals(true, violations.stream()
                         .anyMatch(violation -> violation.getPropertyPath().toString().equals("birthday")
                                 && violation.getConstraintDescriptor().getAnnotation().annotationType().getSimpleName()
